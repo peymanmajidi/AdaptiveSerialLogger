@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaptiveSerialLogger", "AdaptiveSerialLogger\AdaptiveSerialLogger.csproj", "{0EEA3C45-9B5C-49E6-9506-F26E23EE1E85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EEA3C45-9B5C-49E6-9506-F26E23EE1E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EEA3C45-9B5C-49E6-9506-F26E23EE1E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EEA3C45-9B5C-49E6-9506-F26E23EE1E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EEA3C45-9B5C-49E6-9506-F26E23EE1E85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16CAE94E-DDEC-4E61-80E9-470F6F69F34B}
+	EndGlobalSection
+EndGlobal
