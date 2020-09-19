@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,34 +21,63 @@ namespace AdaptiveSerialLogger.Win
 
         private void MainFRM_Load(object sender, EventArgs e)
         {
-            foreach (var port in PortTools.GetList())
+            LoadAllPorts();
+        }
+
+        private void LoadAllPorts()
+        {
+            panel.Controls.Clear();
+            PortTools.Ports.Clear();
+            btnConnnect.Enabled = true;
+            foreach (var port_name in PortTools.GetList())
             {
-                lstPorts.Items.Add(port, false);
+                var port = new Port();
+                var icon = new SerialPortIcon()
+                {
+                    Name = port_name,
+                    PortName = port_name,
+                    Icon = Properties.Resources.serial_gray
+                };
+                port.Icon = icon;
+                panel.Controls.Add(port.Icon);
+                PortTools.Ports.Add(port);
+
             }
 
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnConnect(object sender, EventArgs e)
         {
-            txtLog.Clear();
-            foreach (var port_name in lstPorts.CheckedItems)
+
+            PortTools.CloseAllPorts();
+            btnConnnect.Enabled = false;
+            btnConnnect.Text = "...";
+            Cursor = Cursors.WaitCursor;
+
+            new Thread(() => ConnectToAll()).Start();
+        }
+
+        private void ConnectToAll()
+        {
+            foreach (var port in PortTools.Ports.Where(p => p.Icon.Checked).ToList())
             {
-                var result = PortTools.AddListener(port_name.ToString());
-                //if (result)
-                txtLog.Text += $"{port_name}: {result}\r\n";
+                var result = PortTools.AddListener(port.Icon.PortName);
+                if (result)
+                    port.Icon.Icon = Properties.Resources.serial_normal;
+                else
+                    port.Icon.Icon = Properties.Resources.serial_ban;
 
             }
+            btnDisConnect.Enabled = true;
+            btnConnnect.Text = "Connect All";
+            Cursor = Cursors.Default;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            txtLog.Clear();
-            foreach (var port_name in PortTools.CloseAllPorts())
-            {
-                if (port_name != null)
-                    txtLog.Text += $"{port_name}: Closed\r\n";
-            }
+            PortTools.CloseAllPorts();
+            LoadAllPorts();
         }
 
         private void MainFRM_FormClosed(object sender, FormClosedEventArgs e)

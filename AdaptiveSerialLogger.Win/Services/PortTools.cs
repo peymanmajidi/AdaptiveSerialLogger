@@ -17,8 +17,8 @@ namespace AdaptiveSerialLogger.Win.Services
 
         public static List<string> GetList()
         {
-           return SerialPort.GetPortNames().ToList();
-            
+            return SerialPort.GetPortNames().ToList();
+
         }
 
         public static bool AddListener(string port_name, int baudRate = 9600, Parity parity = Parity.None, int dataBits = 8)
@@ -53,47 +53,30 @@ namespace AdaptiveSerialLogger.Win.Services
             return false;
         }
 
-        public static IEnumerable<string> CloseAllPorts()
+        public static void CloseAllPorts()
         {
 
             foreach (var serialPort in Ports)
             {
-                var port = serialPort.serialPort.PortName;
-                try
-                {
-                    serialPort.serialPort.Close();
-
-                }
-                catch
-                {
-                    port = null;
-
-                }
-                if (port != null)
-                    yield return serialPort.serialPort.PortName;
-
+              if (serialPort.serialPort.IsOpen)
+                        serialPort.serialPort.Close();
+                if (serialPort.Icon != null)
+                    serialPort.Icon.Icon = Properties.Resources.serial_gray;
             }
-            Ports.Clear();
+           
         }
 
-        public static void ClosePort(string port)
+        public static void ClosePort(string port_name)
         {
+            var port = GetPort(port_name);
+            if (port == null)
+                return;
 
-            foreach (var serialPort in Ports.Where(p => p.serialPort.PortName.Equals(port)))
-            {
-                try
-                {
-                    serialPort.serialPort.Close();
-                    Ports.Remove(serialPort);
-
-                }
-                catch
-                {
-
-
-                }
-
-            }
+            if (port.serialPort.IsOpen)
+                port.serialPort.Close();
+            port.serialPort = new SerialPort();
+            port.Data = "";
+            port.Icon.Icon = Properties.Resources.serial_gray;
         }
 
         public static Port GetPort(string port_name)
