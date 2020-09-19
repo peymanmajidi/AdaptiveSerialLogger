@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdaptiveSerialLogger.Win.Services
 {
-    class Port
+  public  class Port
     {
        public SerialPort serialPort;
        public string Data;

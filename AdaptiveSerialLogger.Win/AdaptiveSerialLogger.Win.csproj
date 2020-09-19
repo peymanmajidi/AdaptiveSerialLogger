@@ -54,6 +54,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerialPortIcon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SerialPortIcon.Designer.cs">
+      <DependentUpon>SerialPortIcon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\PortTools.cs" />
     <Compile Include="Services\Port.cs" />
     <EmbeddedResource Include="MainFRM.resx">
@@ -67,7 +73,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SerialPortIcon.resx">
+      <DependentUpon>SerialPortIcon.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,6 +90,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\serial_ban.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\serial_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\serial_normal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
