@@ -107,7 +107,7 @@ namespace AdaptiveSerialLogger.Win
             btnConnnect.Text = "Connect All";
             //panel.Enabled = false;
             lblMessage.Text = "Done!";
-
+           
             Cursor = Cursors.Default;
         }
 
@@ -137,6 +137,8 @@ namespace AdaptiveSerialLogger.Win
             {
                 var port = PortTools.Last;
                 PortTools.Last = null;
+                TextFile.Append(port.serialPort.PortName, port.Data, chkBanner.Checked, chkNewline.Checked);
+
              
                 txtData.Text = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToLongTimeString()} Data: `{port.Data}`\r\n"+ txtData.Text;
             }
@@ -166,6 +168,18 @@ namespace AdaptiveSerialLogger.Win
         private void button3_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(txtData.Text);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.adaptiveagrotech.com/");
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            txtData.Text = TextFile.Help() + "\r\n" + txtData.Text;
+
         }
     }
 }

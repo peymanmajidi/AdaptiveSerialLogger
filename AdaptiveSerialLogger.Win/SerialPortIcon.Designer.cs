@@ -45,6 +45,8 @@
             this.picIcon.TabStop = false;
             this.picIcon.Click += new System.EventHandler(this.pictureBox1_Click);
             this.picIcon.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            this.picIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picIcon_MouseClick);
+            this.picIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.picIcon_MouseDoubleClick);
             // 
             // chkPort
             // 

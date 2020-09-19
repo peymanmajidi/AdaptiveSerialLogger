@@ -56,17 +56,29 @@ namespace AdaptiveSerialLogger.Win
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            chkPort.Checked = !chkPort.Checked;
+           
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            TextFile.OpenFile(portName);
+           
         }
 
         private void chkPort_CheckedChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void picIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            chkPort.Checked = !chkPort.Checked;
+        }
+
+        private void picIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            chkPort.Checked = !chkPort.Checked;
+
+            TextFile.OpenFile(portName);
         }
     }
 }
