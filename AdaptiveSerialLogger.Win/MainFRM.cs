@@ -43,7 +43,7 @@ namespace AdaptiveSerialLogger.Win
         private void button2_Click(object sender, EventArgs e)
         {
             txtLog.Clear();
-            foreach (var port_name in PortTools.ClosePorts())
+            foreach (var port_name in PortTools.CloseAllPorts())
             {
                 if (port_name != null)
                     txtLog.Text += $"{port_name}: Closed\r\n";
@@ -52,7 +52,7 @@ namespace AdaptiveSerialLogger.Win
 
         private void MainFRM_FormClosed(object sender, FormClosedEventArgs e)
         {
-            PortTools.ClosePorts();
+            PortTools.CloseAllPorts();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -9,7 +9,7 @@ namespace AdaptiveSerialLogger.Win.Services
 {
     class PortTools
     {
-        public static List<Port> Ports= new List<Port>();
+        public static List<Port> Ports = new List<Port>();
         public static Port Last;
 
 
@@ -17,8 +17,8 @@ namespace AdaptiveSerialLogger.Win.Services
 
         public static List<string> GetList()
         {
-            var ports = SerialPort.GetPortNames().ToList();
-            return ports;
+           return SerialPort.GetPortNames().ToList();
+            
         }
 
         public static bool AddListener(string port_name, int baudRate = 9600, Parity parity = Parity.None, int dataBits = 8)
@@ -39,8 +39,8 @@ namespace AdaptiveSerialLogger.Win.Services
                 mySerialPort.Open();
                 Ports.Add(new Port()
                 {
-                     serialPort = mySerialPort,
-                     Data = ""
+                    serialPort = mySerialPort,
+                    Data = ""
                 });
                 return true;
 
@@ -53,7 +53,7 @@ namespace AdaptiveSerialLogger.Win.Services
             return false;
         }
 
-        public static IEnumerable<string> ClosePorts()
+        public static IEnumerable<string> CloseAllPorts()
         {
 
             foreach (var serialPort in Ports)
@@ -69,7 +69,7 @@ namespace AdaptiveSerialLogger.Win.Services
                     port = null;
 
                 }
-                if(port != null)
+                if (port != null)
                     yield return serialPort.serialPort.PortName;
 
             }
@@ -79,7 +79,7 @@ namespace AdaptiveSerialLogger.Win.Services
         public static void ClosePort(string port)
         {
 
-            foreach (var serialPort in Ports.Where(p=>p.serialPort.PortName.Equals(port)))
+            foreach (var serialPort in Ports.Where(p => p.serialPort.PortName.Equals(port)))
             {
                 try
                 {
@@ -96,15 +96,25 @@ namespace AdaptiveSerialLogger.Win.Services
             }
         }
 
+        public static Port GetPort(string port_name)
+        {
+            return Ports.FirstOrDefault(p => p.serialPort.PortName.Equals(port_name));
+
+        }
+
         public static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             var sp = (SerialPort)sender;
             var data = sp.ReadExisting();
             var my_port = (SerialPort)sender;
-            var port = Ports.FirstOrDefault(p=>p.serialPort.PortName.Equals(my_port.PortName));
+            var port = GetPort(my_port.PortName);
             port.Data += data + "\r\n";
 
-            Last = port;
+            Last = new Port
+            {
+                serialPort = my_port,
+                Data = data
+            };
 
 
         }
