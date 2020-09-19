@@ -36,7 +36,8 @@ namespace AdaptiveSerialLogger.Win
                 {
                     Name = port_name,
                     PortName = port_name,
-                    Icon = Properties.Resources.serial_gray
+                    Icon = Properties.Resources.serial_gray,
+             
                 };
                 port.Icon = icon;
                 panel.Controls.Add(port.Icon);
@@ -71,6 +72,7 @@ namespace AdaptiveSerialLogger.Win
             }
             btnDisConnect.Enabled = true;
             btnConnnect.Text = "Connect All";
+            panel.Enabled = false;
             Cursor = Cursors.Default;
         }
 

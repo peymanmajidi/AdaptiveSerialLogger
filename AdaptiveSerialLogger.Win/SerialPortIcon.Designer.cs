@@ -37,9 +37,9 @@
             // 
             this.picIcon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picIcon.Image = global::AdaptiveSerialLogger.Win.Properties.Resources.serial_normal;
-            this.picIcon.Location = new System.Drawing.Point(3, 2);
+            this.picIcon.Location = new System.Drawing.Point(2, 2);
             this.picIcon.Name = "picIcon";
-            this.picIcon.Size = new System.Drawing.Size(118, 58);
+            this.picIcon.Size = new System.Drawing.Size(126, 58);
             this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picIcon.TabIndex = 0;
             this.picIcon.TabStop = false;
@@ -49,7 +49,7 @@
             // chkPort
             // 
             this.chkPort.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.chkPort.Location = new System.Drawing.Point(15, 54);
+            this.chkPort.Location = new System.Drawing.Point(15, 59);
             this.chkPort.Name = "chkPort";
             this.chkPort.Size = new System.Drawing.Size(105, 33);
             this.chkPort.TabIndex = 1;
@@ -64,7 +64,7 @@
             this.Controls.Add(this.picIcon);
             this.Controls.Add(this.chkPort);
             this.Name = "SerialPortIcon";
-            this.Size = new System.Drawing.Size(122, 92);
+            this.Size = new System.Drawing.Size(132, 91);
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
             this.ResumeLayout(false);
 
