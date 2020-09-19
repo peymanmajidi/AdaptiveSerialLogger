@@ -23,6 +23,14 @@ namespace AdaptiveSerialLogger.Win.Services
 
         }
 
+        public static List<Port> GetListOfSelected()
+        {
+            return PortTools.Ports.Where(p => p.Icon.Checked).ToList();
+
+        }
+
+
+
         public static bool AddListener(string port_name, int baudRate = 9600, Parity parity = Parity.None, int dataBits = 8)
         {
             ClosePort(port_name);

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,11 +23,15 @@ namespace AdaptiveSerialLogger.Win
 
         private void MainFRM_Load(object sender, EventArgs e)
         {
+            
+
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var folder = Path.Combine(path, Program.FOLDER);
             if (Directory.Exists(folder) == false)
                 Directory.CreateDirectory(folder);
             LoadAllPorts();
+
+            cmbParity.SelectedIndex = 0;
         }
 
         private void LoadAllPorts()
@@ -55,36 +60,70 @@ namespace AdaptiveSerialLogger.Win
 
         private void btnConnect(object sender, EventArgs e)
         {
+            if (PortTools.GetListOfSelected().Count() == 0)
+            {
+
+                MessageBox.Show("Please select at least 1 Serial port","None Serial Port selected", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                panel.Focus();
+                return;
+            }
+
 
             PortTools.CloseAllPorts();
             btnConnnect.Enabled = false;
             btnConnnect.Text = "...";
+            lblMessage.Text = "Please wait...";
+            statusStrip1.Refresh();
             Cursor = Cursors.WaitCursor;
+            Int32.TryParse(txtDatabit.Text, out int databit);
+            Int32.TryParse(txtBrate.Text, out int bRate);
+            var parity = (Parity)Enum.Parse(typeof(Parity), cmbParity.Text);
 
-            new Thread(() => ConnectToAll()).Start();
+            var task = new Task(() => ConnectToAll(bRate, parity, databit));
+            task.Start();
+            txtData.Clear();
+            timer1.Enabled = true;
+          
+
+
         }
 
-        private void ConnectToAll()
+        private void ConnectToAll(int bRate, Parity parity,int databit)
         {
-            foreach (var port in PortTools.Ports.Where(p => p.Icon.Checked).ToList())
+            foreach (var port in PortTools.GetListOfSelected())
             {
-                var result = PortTools.AddListener(port.Icon.PortName);
+
+
+                var result = PortTools.AddListener(port.Icon.PortName, bRate, parity, databit);
                 if (result)
                     port.Icon.Icon = Properties.Resources.serial_normal;
                 else
                     port.Icon.Icon = Properties.Resources.serial_ban;
 
+               
+
             }
             btnDisConnect.Enabled = true;
             btnConnnect.Text = "Connect All";
             //panel.Enabled = false;
+            lblMessage.Text = "Done!";
+
             Cursor = Cursors.Default;
+        }
+
+        private void CheckEntries()
+        {
+            Int32.TryParse(txtDatabit.Text, out int databit);
+            Int32.TryParse(txtBrate.Text, out int bRate);
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             PortTools.CloseAllPorts();
             LoadAllPorts();
+            timer1.Enabled = false;
         }
 
         private void MainFRM_FormClosed(object sender, FormClosedEventArgs e)
@@ -98,10 +137,10 @@ namespace AdaptiveSerialLogger.Win
             {
                 var port = PortTools.Last;
                 PortTools.Last = null;
-                txtData.Clear();
-                txtData.Text = "Port: " + port.serialPort.PortName + Environment.NewLine
-                    + "Data: " + port.Data;
+             
+                txtData.Text = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToLongTimeString()} Data: `{port.Data}`\r\n"+ txtData.Text;
             }
+           
         }
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
@@ -117,6 +156,16 @@ namespace AdaptiveSerialLogger.Win
         {
             TextFile.OpenFolder();
 
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            txtData.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtData.Text);
         }
     }
 }
