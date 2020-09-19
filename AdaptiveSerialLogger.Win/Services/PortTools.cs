@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,10 @@ namespace AdaptiveSerialLogger.Win.Services
 
 
 
+        
         public static List<string> GetList()
         {
-            return SerialPort.GetPortNames().ToList();
+            return SerialPort.GetPortNames().OrderBy(x=>x.Length).ThenBy(x=>x).ToList();
 
         }
 

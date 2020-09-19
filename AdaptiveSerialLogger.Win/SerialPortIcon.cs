@@ -61,7 +61,7 @@ namespace AdaptiveSerialLogger.Win
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Test");
+            TextFile.OpenFile(portName);
         }
 
         private void chkPort_CheckedChanged(object sender, EventArgs e)

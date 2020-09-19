@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -21,6 +22,10 @@ namespace AdaptiveSerialLogger.Win
 
         private void MainFRM_Load(object sender, EventArgs e)
         {
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            var folder = Path.Combine(path, Program.FOLDER);
+            if (Directory.Exists(folder) == false)
+                Directory.CreateDirectory(folder);
             LoadAllPorts();
         }
 
@@ -37,7 +42,7 @@ namespace AdaptiveSerialLogger.Win
                     Name = port_name,
                     PortName = port_name,
                     Icon = Properties.Resources.serial_gray,
-             
+
                 };
                 port.Icon = icon;
                 panel.Controls.Add(port.Icon);
@@ -72,7 +77,7 @@ namespace AdaptiveSerialLogger.Win
             }
             btnDisConnect.Enabled = true;
             btnConnnect.Text = "Connect All";
-            panel.Enabled = false;
+            //panel.Enabled = false;
             Cursor = Cursors.Default;
         }
 
@@ -97,6 +102,21 @@ namespace AdaptiveSerialLogger.Win
                 txtData.Text = "Port: " + port.serialPort.PortName + Environment.NewLine
                     + "Data: " + port.Data;
             }
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TextFile.OpenFolder();
+
         }
     }
 }

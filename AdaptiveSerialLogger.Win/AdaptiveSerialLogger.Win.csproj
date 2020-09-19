@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="Services\PortTools.cs" />
     <Compile Include="Services\Port.cs" />
+    <Compile Include="Services\TextFile.cs" />
     <EmbeddedResource Include="MainFRM.resx">
       <DependentUpon>MainFRM.cs</DependentUpon>
     </EmbeddedResource>

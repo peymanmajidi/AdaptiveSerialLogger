@@ -8,6 +8,8 @@ namespace AdaptiveSerialLogger.Win
 {
     static class Program
     {
+       public static string FOLDER = "Logs";
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
