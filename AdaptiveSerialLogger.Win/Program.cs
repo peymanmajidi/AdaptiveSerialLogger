@@ -9,6 +9,7 @@ namespace AdaptiveSerialLogger.Win
     static class Program
     {
        public static string FOLDER = "Logs";
+       public static int MAX_LOG_LENGTH = 100000;
 
         /// <summary>
         /// The main entry point for the application.

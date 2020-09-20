@@ -23,7 +23,7 @@ namespace AdaptiveSerialLogger.Win
 
         private void MainFRM_Load(object sender, EventArgs e)
         {
-            
+
 
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var folder = Path.Combine(path, Program.FOLDER);
@@ -31,7 +31,7 @@ namespace AdaptiveSerialLogger.Win
                 Directory.CreateDirectory(folder);
             LoadAllPorts();
 
-            cmbParity.SelectedIndex = 0;
+            cmbDataFormat.SelectedIndex = cmbParity.SelectedIndex = 0;
         }
 
         private void LoadAllPorts()
@@ -41,18 +41,26 @@ namespace AdaptiveSerialLogger.Win
             btnConnnect.Enabled = true;
             foreach (var port_name in PortTools.GetList())
             {
-                var port = new Port();
-                var icon = new SerialPortIcon()
+                try
                 {
-                    Name = port_name,
-                    PortName = port_name,
-                    Icon = Properties.Resources.serial_gray,
+                    var port = new Port();
+                    var icon = new SerialPortIcon()
+                    {
+                        Name = port_name,
+                        PortName = port_name,
+                        Icon = Properties.Resources.serial_gray,
 
-                };
-                port.Icon = icon;
-                panel.Controls.Add(port.Icon);
-                PortTools.Ports.Add(port);
+                    };
+                    port.Icon = icon;
+                    panel.Controls.Add(port.Icon);
+                    PortTools.Ports.Add(port);
 
+                }
+                catch 
+                {
+
+                   
+                }
             }
 
 
@@ -63,7 +71,7 @@ namespace AdaptiveSerialLogger.Win
             if (PortTools.GetListOfSelected().Count() == 0)
             {
 
-                MessageBox.Show("Please select at least 1 Serial port","None Serial Port selected", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("Please select at least 1 Serial port", "None Serial Port selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 panel.Focus();
                 return;
             }
@@ -83,31 +91,39 @@ namespace AdaptiveSerialLogger.Win
             task.Start();
             txtData.Clear();
             timer1.Enabled = true;
-          
+
 
 
         }
 
-        private void ConnectToAll(int bRate, Parity parity,int databit)
+        private void ConnectToAll(int bRate, Parity parity, int databit)
         {
             foreach (var port in PortTools.GetListOfSelected())
             {
 
 
-                var result = PortTools.AddListener(port.Icon.PortName, bRate, parity, databit);
-                if (result)
-                    port.Icon.Icon = Properties.Resources.serial_normal;
-                else
-                    port.Icon.Icon = Properties.Resources.serial_ban;
+                try
+                {
+                    var result = PortTools.AddListener(port.Icon.PortName, bRate, parity, databit);
 
-               
+                    if (result)
+                        port.Icon.Icon = Properties.Resources.serial_normal;
+                    else
+                        port.Icon.Icon = Properties.Resources.serial_ban;
+
+                }
+                catch 
+                {
+
+                }
+
 
             }
             btnDisConnect.Enabled = true;
             btnConnnect.Text = "Connect All";
             //panel.Enabled = false;
             lblMessage.Text = "Done!";
-           
+
             Cursor = Cursors.Default;
         }
 
@@ -139,10 +155,13 @@ namespace AdaptiveSerialLogger.Win
                 PortTools.Last = null;
                 TextFile.Append(port.serialPort.PortName, port.Data, chkBanner.Checked, chkNewline.Checked);
 
-             
-                txtData.Text = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToLongTimeString()} Data: `{port.Data}`\r\n"+ txtData.Text;
+                var log = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToLongTimeString()} Data: `{port.Data}`\r\n" + txtData.Text;
+                if (log.Length > Program.MAX_LOG_LENGTH)
+                    log = log.Substring(0, Program.MAX_LOG_LENGTH);
+                txtData.Text = log;
+
             }
-           
+
         }
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
@@ -180,6 +199,11 @@ namespace AdaptiveSerialLogger.Win
         {
             txtData.Text = TextFile.Help() + "\r\n" + txtData.Text;
 
+        }
+
+        private void cmbDataFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PortTools.DataFormat = (DataFormat)cmbDataFormat.SelectedIndex;
         }
     }
 }

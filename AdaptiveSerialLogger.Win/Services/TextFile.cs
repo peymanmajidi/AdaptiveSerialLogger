@@ -10,39 +10,67 @@ namespace AdaptiveSerialLogger.Win.Services
 {
     class TextFile
     {
-        public static void OpenFile(string port_name)
+        public static void OpenFile(string port_name, bool banner = true)
         {
-            var path = AppDomain.CurrentDomain.BaseDirectory;
-
-            var file = path + "\\" + Program.FOLDER + "\\_" + port_name + ".txt";
-            if (File.Exists(file) == false)
+            try
             {
-                File.Create(file).Close();
+                var path = AppDomain.CurrentDomain.BaseDirectory;
 
+                var file = path + "\\" + Program.FOLDER + "\\_" + port_name + ".txt";
+                CreateFile(port_name, banner);
+
+                System.Diagnostics.Process.Start("notepad.exe", file);
             }
+            catch
+            {
 
-            System.Diagnostics.Process.Start("notepad.exe", file);
+                
+            }
 
         }
 
+        public static void CreateFile(string port_name, bool banner = false)
+        {
+            try
+            {
+                var path = AppDomain.CurrentDomain.BaseDirectory;
+
+                var file = path + "\\" + Program.FOLDER + "\\_" + port_name + ".txt";
+                if (File.Exists(file) == false)
+                {
+                    File.Create(file).Close();
+                    if (banner)
+                        File.WriteAllText(file, TextFile.Banner());
+
+                    var body = $"☐ Serial Port: [{port_name}]\r\n☐ Create Date: {DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}\r\n\r\n☐ Logs:\r\n";
+                    File.AppendAllText(file, body);
+                }
+            }
+            catch
+            {
+
+
+            }
+
+        }
 
         public static void Append(string port_name, string data, bool banner = false, bool newLineAppend = false)
         {
-            var path = AppDomain.CurrentDomain.BaseDirectory;
-
-            var file = path + "\\" + Program.FOLDER + "\\_" + port_name + ".txt";
-            if (File.Exists(file) == false)
+            try
             {
-                File.Create(file).Close();
-                if (banner)
-                    File.WriteAllText(file, TextFile.Banner());
+                var path = AppDomain.CurrentDomain.BaseDirectory;
 
-                var body = $"☐ Serial Port: [{port_name}]\r\n☐ Create Date: {DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}\r\n\r\n☐ Logs:\r\n";
-                File.AppendAllText(file, body);
+                var file = path + "\\" + Program.FOLDER + "\\_" + port_name + ".txt";
+                CreateFile(port_name, banner);
+                if (newLineAppend)
+                    data = Environment.NewLine + data;
+                File.AppendAllText(file, data);
             }
-            if (newLineAppend)
-                data = Environment.NewLine + data;
-            File.AppendAllText(file, data);
+            catch
+            {
+
+
+            }
 
         }
         public static string Help()
@@ -64,7 +92,7 @@ Copyright © AdaptiveAgroTech Consultancy Int.
 ";
         }
 
-            public static void OpenFolder()
+        public static void OpenFolder()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var folder = Path.Combine(path, Program.FOLDER);
