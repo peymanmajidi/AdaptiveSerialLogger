@@ -44,7 +44,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbParity = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtBrate = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDatabit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,6 +60,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cmbBaod = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -149,6 +149,7 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.cmbBaod);
             this.groupBox2.Controls.Add(this.cmbDataFormat);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.chkBanner);
@@ -156,7 +157,6 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.cmbParity);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.txtBrate);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.txtDatabit);
             this.groupBox2.Controls.Add(this.label1);
@@ -179,7 +179,7 @@
             "Auto",
             "New Line at the end",
             "Sequence"});
-            this.cmbDataFormat.Location = new System.Drawing.Point(83, 103);
+            this.cmbDataFormat.Location = new System.Drawing.Point(82, 103);
             this.cmbDataFormat.Margin = new System.Windows.Forms.Padding(2);
             this.cmbDataFormat.Name = "cmbDataFormat";
             this.cmbDataFormat.Size = new System.Drawing.Size(109, 21);
@@ -241,7 +241,7 @@
             "Even",
             "Mark",
             "Space"});
-            this.cmbParity.Location = new System.Drawing.Point(83, 75);
+            this.cmbParity.Location = new System.Drawing.Point(82, 73);
             this.cmbParity.Margin = new System.Windows.Forms.Padding(2);
             this.cmbParity.Name = "cmbParity";
             this.cmbParity.Size = new System.Drawing.Size(109, 21);
@@ -257,17 +257,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Parity:";
             // 
-            // txtBrate
-            // 
-            this.txtBrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.txtBrate.Location = new System.Drawing.Point(83, 50);
-            this.txtBrate.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBrate.Name = "txtBrate";
-            this.txtBrate.Size = new System.Drawing.Size(109, 21);
-            this.txtBrate.TabIndex = 3;
-            this.txtBrate.Text = "115200";
-            this.txtBrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -281,7 +270,7 @@
             // txtDatabit
             // 
             this.txtDatabit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.txtDatabit.Location = new System.Drawing.Point(83, 26);
+            this.txtDatabit.Location = new System.Drawing.Point(82, 23);
             this.txtDatabit.Margin = new System.Windows.Forms.Padding(2);
             this.txtDatabit.Name = "txtDatabit";
             this.txtDatabit.Size = new System.Drawing.Size(109, 21);
@@ -459,6 +448,31 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // cmbBaod
+            // 
+            this.cmbBaod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBaod.FormattingEnabled = true;
+            this.cmbBaod.Items.AddRange(new object[] {
+            "110",
+            "300",
+            "600",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "14400",
+            "38400",
+            "56000",
+            "57600",
+            "115200",
+            "128000",
+            "256000"});
+            this.cmbBaod.Location = new System.Drawing.Point(82, 48);
+            this.cmbBaod.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbBaod.Name = "cmbBaod";
+            this.cmbBaod.Size = new System.Drawing.Size(109, 21);
+            this.cmbBaod.TabIndex = 11;
+            // 
             // MainFRM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -506,7 +520,6 @@
         private System.Windows.Forms.TextBox txtDatabit;
         private System.Windows.Forms.ComboBox cmbParity;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtBrate;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStat;
         private System.Windows.Forms.Panel panel1;
@@ -524,6 +537,7 @@
         private System.Windows.Forms.ComboBox cmbDataFormat;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ComboBox cmbBaod;
     }
 }
 

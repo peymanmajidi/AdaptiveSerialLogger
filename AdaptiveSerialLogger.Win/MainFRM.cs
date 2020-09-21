@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
@@ -27,11 +28,13 @@ namespace AdaptiveSerialLogger.Win
 
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var folder = Path.Combine(path, Program.FOLDER);
+
             if (Directory.Exists(folder) == false)
                 Directory.CreateDirectory(folder);
             LoadAllPorts();
+            cmbBaod.SelectedIndex = 11;
 
-            cmbDataFormat.SelectedIndex = cmbParity.SelectedIndex = 0;
+             cmbDataFormat.SelectedIndex = cmbParity.SelectedIndex = 0;
         }
 
         private void LoadAllPorts()
@@ -84,7 +87,7 @@ namespace AdaptiveSerialLogger.Win
             statusStrip1.Refresh();
             Cursor = Cursors.WaitCursor;
             Int32.TryParse(txtDatabit.Text, out int databit);
-            Int32.TryParse(txtBrate.Text, out int bRate);
+            Int32.TryParse(cmbBaod.Text, out int bRate);
             var parity = (Parity)Enum.Parse(typeof(Parity), cmbParity.Text);
 
             var task = new Task(() => ConnectToAll(bRate, parity, databit));
@@ -127,14 +130,7 @@ namespace AdaptiveSerialLogger.Win
             Cursor = Cursors.Default;
         }
 
-        private void CheckEntries()
-        {
-            Int32.TryParse(txtDatabit.Text, out int databit);
-            Int32.TryParse(txtBrate.Text, out int bRate);
-
-
-        }
-
+     
         private void btnDis(object sender, EventArgs e)
         {
             PortTools.CloseAllPorts();
@@ -201,7 +197,12 @@ namespace AdaptiveSerialLogger.Win
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+          //  Application.Restart();
+
+            foreach (Process process in Process.GetProcessesByName("taskmgr"))
+                 process.Kill();
+                
+            
 
         }
 
