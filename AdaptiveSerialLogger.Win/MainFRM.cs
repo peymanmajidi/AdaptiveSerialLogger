@@ -135,11 +135,15 @@ namespace AdaptiveSerialLogger.Win
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnDis(object sender, EventArgs e)
         {
             PortTools.CloseAllPorts();
-            LoadAllPorts();
+            btnConnnect.Enabled = true;
+            btnDisConnect.Enabled = false;
+
+
             timer1.Enabled = false;
+
         }
 
         private void MainFRM_FormClosed(object sender, FormClosedEventArgs e)
@@ -155,7 +159,7 @@ namespace AdaptiveSerialLogger.Win
                 PortTools.Last = null;
                 TextFile.Append(port.serialPort.PortName, port.Data, chkBanner.Checked, chkNewline.Checked);
 
-                var log = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToLongTimeString()} Data: `{port.Data}`\r\n" + txtData.Text;
+                var log = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToString("HH:mm:ss")} Data: `{port.Data}`\r\n" + txtData.Text;
                 if (log.Length > Program.MAX_LOG_LENGTH)
                     log = log.Substring(0, Program.MAX_LOG_LENGTH);
                 txtData.Text = log;
@@ -197,13 +201,18 @@ namespace AdaptiveSerialLogger.Win
 
         private void button4_Click(object sender, EventArgs e)
         {
-            txtData.Text = TextFile.Help() + "\r\n" + txtData.Text;
+            Application.Restart();
 
         }
 
         private void cmbDataFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             PortTools.DataFormat = (DataFormat)cmbDataFormat.SelectedIndex;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            txtData.Text = TextFile.Help() + "\r\n" + txtData.Text;
         }
     }
 }

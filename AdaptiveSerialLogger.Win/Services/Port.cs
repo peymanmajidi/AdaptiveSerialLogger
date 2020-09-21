@@ -9,7 +9,8 @@ namespace AdaptiveSerialLogger.Win.Services
 {
     public class Port
     {
-        public SerialPortIcon Icon;
+        public SerialPortIcon Icon = new SerialPortIcon();
+        public bool HasNewLine = false;
         public SerialPort serialPort = new SerialPort();
         public string Data;
     }

@@ -35,6 +35,7 @@ namespace AdaptiveSerialLogger.Win.Services
 
         public static List<Port> GetListOfSelected()
         {
+
             return PortTools.Ports.Where(p => p.Icon.Checked).ToList();
 
         }
@@ -56,6 +57,8 @@ namespace AdaptiveSerialLogger.Win.Services
                 mySerialPort.NewLine = Environment.NewLine;
 
                 mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+                mySerialPort.Disposed += SerialPort_Disposed;
+
 
                 mySerialPort.Open();
                 Ports.Add(new Port()
@@ -74,32 +77,45 @@ namespace AdaptiveSerialLogger.Win.Services
             return false;
         }
 
+        private static void SerialPort_Disposed(object sender, EventArgs e)
+        {
+            var mySerialPort = (SerialPort)sender;
+            if (mySerialPort.IsOpen)
+            {
+                mySerialPort.DiscardInBuffer();
+                mySerialPort.Close(); }
+           
+        }
+
         public static void CloseAllPorts()
         {
 
-            foreach (var serialPort in Ports)
+            foreach (var item in Ports)
             {
                 try
                 {
-                    if (serialPort.serialPort.IsOpen)
-                        serialPort.serialPort.Close();
+                    if (item.serialPort.IsOpen)
+                    {
+                        item.serialPort.DiscardInBuffer();
+                        item.serialPort.Close();
+                    }
 
                 }
                 catch
                 {
 
-                  
+
                 }
 
                 try
                 {
-                    if (serialPort.Icon != null)
-                        serialPort.Icon.Icon = Properties.Resources.serial_gray;
+                    if (item.Icon != null)
+                        item.Icon.Icon = Properties.Resources.serial_gray;
                 }
                 catch
                 {
 
-                   
+
                 }
             }
 
@@ -119,10 +135,10 @@ namespace AdaptiveSerialLogger.Win.Services
                 port.Data = "";
                 port.Icon.Icon = Properties.Resources.serial_gray;
             }
-            catch 
+            catch
             {
 
-               
+
             }
         }
 
@@ -131,7 +147,7 @@ namespace AdaptiveSerialLogger.Win.Services
             return Ports.FirstOrDefault(p => p.serialPort.PortName.Equals(port_name));
 
         }
-        static bool has_new_line = false;
+
         public static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             var sp = (SerialPort)sender;
@@ -142,12 +158,13 @@ namespace AdaptiveSerialLogger.Win.Services
                 data = sp.ReadLine();
             else
             {
-                if(has_new_line)
+                var myport = Ports.FirstOrDefault(p=> p.serialPort == sp);
+                if (myport.HasNewLine)
                     data = sp.ReadLine();
                 else
                 {
                     data = sp.ReadExisting();
-                    has_new_line = data.Contains(sp.NewLine);
+                    myport.HasNewLine = data.Contains(sp.NewLine);
 
                 }
 
@@ -163,6 +180,7 @@ namespace AdaptiveSerialLogger.Win.Services
             {
                 serialPort = my_port,
                 Data = data
+              
             };
 
 
