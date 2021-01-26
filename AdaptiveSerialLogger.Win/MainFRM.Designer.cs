@@ -54,7 +54,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -71,6 +70,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtByteToSave = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,7 +91,7 @@
             this.btnConnnect.Location = new System.Drawing.Point(2, 175);
             this.btnConnnect.Margin = new System.Windows.Forms.Padding(2);
             this.btnConnnect.Name = "btnConnnect";
-            this.btnConnnect.Size = new System.Drawing.Size(195, 34);
+            this.btnConnnect.Size = new System.Drawing.Size(234, 34);
             this.btnConnnect.TabIndex = 1;
             this.btnConnnect.Text = "Connect";
             this.btnConnnect.UseVisualStyleBackColor = false;
@@ -106,7 +108,7 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLog.Size = new System.Drawing.Size(998, 224);
+            this.txtLog.Size = new System.Drawing.Size(932, 224);
             this.txtLog.TabIndex = 3;
             this.txtLog.Text = "$";
             // 
@@ -119,7 +121,7 @@
             this.btnDisConnect.Location = new System.Drawing.Point(2, 209);
             this.btnDisConnect.Margin = new System.Windows.Forms.Padding(2);
             this.btnDisConnect.Name = "btnDisConnect";
-            this.btnDisConnect.Size = new System.Drawing.Size(195, 28);
+            this.btnDisConnect.Size = new System.Drawing.Size(234, 28);
             this.btnDisConnect.TabIndex = 5;
             this.btnDisConnect.Text = "Disconnect All";
             this.btnDisConnect.UseVisualStyleBackColor = false;
@@ -134,7 +136,7 @@
             this.panel.Margin = new System.Windows.Forms.Padding(2);
             this.panel.Name = "panel";
             this.panel.Padding = new System.Windows.Forms.Padding(8, 8, 0, 0);
-            this.panel.Size = new System.Drawing.Size(797, 222);
+            this.panel.Size = new System.Drawing.Size(692, 222);
             this.panel.TabIndex = 6;
             this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             // 
@@ -148,7 +150,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(801, 239);
+            this.groupBox1.Size = new System.Drawing.Size(696, 239);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Available Serial Ports";
@@ -168,11 +170,11 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnConnnect);
             this.groupBox2.Controls.Add(this.btnDisConnect);
-            this.groupBox2.Location = new System.Drawing.Point(811, 119);
+            this.groupBox2.Location = new System.Drawing.Point(706, 119);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(199, 239);
+            this.groupBox2.Size = new System.Drawing.Size(238, 239);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Configuration\r\n";
@@ -199,7 +201,7 @@
             this.cmbBaod.Location = new System.Drawing.Point(82, 48);
             this.cmbBaod.Margin = new System.Windows.Forms.Padding(2);
             this.cmbBaod.Name = "cmbBaod";
-            this.cmbBaod.Size = new System.Drawing.Size(109, 21);
+            this.cmbBaod.Size = new System.Drawing.Size(141, 21);
             this.cmbBaod.TabIndex = 11;
             this.cmbBaod.SelectedIndexChanged += new System.EventHandler(this.cmbBaod_SelectedIndexChanged);
             // 
@@ -214,7 +216,7 @@
             this.cmbDataFormat.Location = new System.Drawing.Point(82, 103);
             this.cmbDataFormat.Margin = new System.Windows.Forms.Padding(2);
             this.cmbDataFormat.Name = "cmbDataFormat";
-            this.cmbDataFormat.Size = new System.Drawing.Size(109, 21);
+            this.cmbDataFormat.Size = new System.Drawing.Size(141, 21);
             this.cmbDataFormat.TabIndex = 10;
             this.cmbDataFormat.SelectedIndexChanged += new System.EventHandler(this.cmbDataFormat_SelectedIndexChanged);
             // 
@@ -231,12 +233,14 @@
             // chkNewline
             // 
             this.chkNewline.AutoSize = true;
+            this.chkNewline.Checked = true;
+            this.chkNewline.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkNewline.Location = new System.Drawing.Point(14, 152);
             this.chkNewline.Margin = new System.Windows.Forms.Padding(2);
             this.chkNewline.Name = "chkNewline";
-            this.chkNewline.Size = new System.Drawing.Size(177, 17);
+            this.chkNewline.Size = new System.Drawing.Size(209, 17);
             this.chkNewline.TabIndex = 7;
-            this.chkNewline.Text = "Add New-Line end of each data";
+            this.chkNewline.Text = "Add New-Line end of each row of data";
             this.chkNewline.UseVisualStyleBackColor = true;
             // 
             // label4
@@ -263,7 +267,7 @@
             this.cmbParity.Location = new System.Drawing.Point(82, 73);
             this.cmbParity.Margin = new System.Windows.Forms.Padding(2);
             this.cmbParity.Name = "cmbParity";
-            this.cmbParity.Size = new System.Drawing.Size(109, 21);
+            this.cmbParity.Size = new System.Drawing.Size(141, 21);
             this.cmbParity.TabIndex = 5;
             this.cmbParity.SelectedIndexChanged += new System.EventHandler(this.cmbParity_SelectedIndexChanged);
             // 
@@ -293,7 +297,7 @@
             this.txtDatabit.Location = new System.Drawing.Point(82, 23);
             this.txtDatabit.Margin = new System.Windows.Forms.Padding(2);
             this.txtDatabit.Name = "txtDatabit";
-            this.txtDatabit.Size = new System.Drawing.Size(109, 21);
+            this.txtDatabit.Size = new System.Drawing.Size(141, 21);
             this.txtDatabit.TabIndex = 1;
             this.txtDatabit.Text = "8";
             this.txtDatabit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -320,7 +324,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(1002, 241);
+            this.groupBox3.Size = new System.Drawing.Size(936, 241);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Logs";
@@ -331,7 +335,7 @@
             this.button3.BackColor = System.Drawing.Color.Black;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.Color.Lime;
-            this.button3.Location = new System.Drawing.Point(856, 212);
+            this.button3.Location = new System.Drawing.Point(790, 212);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(59, 22);
@@ -346,7 +350,7 @@
             this.button2.BackColor = System.Drawing.Color.Black;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.Lime;
-            this.button2.Location = new System.Drawing.Point(920, 212);
+            this.button2.Location = new System.Drawing.Point(854, 212);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(59, 22);
@@ -362,11 +366,13 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStat,
             this.toolStripStatusLabel1,
-            this.lblMessage});
+            this.lblMessage,
+            this.toolStripStatusLabel2,
+            this.txtByteToSave});
             this.statusStrip1.Location = new System.Drawing.Point(0, 668);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1018, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(952, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -400,29 +406,15 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1018, 114);
+            this.panel1.Size = new System.Drawing.Size(952, 114);
             this.panel1.TabIndex = 13;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(741, 14);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(86, 78);
-            this.button5.TabIndex = 5;
-            this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(829, 14);
+            this.button4.Location = new System.Drawing.Point(673, 14);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 78);
@@ -435,19 +427,19 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label5.Location = new System.Drawing.Point(96, 59);
+            this.label5.Location = new System.Drawing.Point(105, 58);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 16);
+            this.label5.Size = new System.Drawing.Size(172, 16);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Port Manager (v0.1)";
+            this.label5.Text = "Port Manager (v2.0 preview)";
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(919, 14);
+            this.button1.Location = new System.Drawing.Point(853, 14);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 78);
@@ -460,10 +452,10 @@
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(10, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 9);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(385, 93);
+            this.pictureBox1.Size = new System.Drawing.Size(410, 89);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -485,7 +477,7 @@
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Location = new System.Drawing.Point(10, 360);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(996, 65);
+            this.groupBox4.Size = new System.Drawing.Size(930, 65);
             this.groupBox4.TabIndex = 14;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Send Data";
@@ -494,7 +486,7 @@
             // 
             this.button10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button10.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button10.Location = new System.Drawing.Point(692, 25);
+            this.button10.Location = new System.Drawing.Point(659, 25);
             this.button10.Margin = new System.Windows.Forms.Padding(2);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(32, 27);
@@ -507,7 +499,7 @@
             // 
             this.button9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button9.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button9.Location = new System.Drawing.Point(657, 25);
+            this.button9.Location = new System.Drawing.Point(624, 25);
             this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(32, 27);
@@ -520,7 +512,7 @@
             // 
             this.button8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button8.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button8.Location = new System.Drawing.Point(622, 25);
+            this.button8.Location = new System.Drawing.Point(589, 25);
             this.button8.Margin = new System.Windows.Forms.Padding(2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(32, 27);
@@ -533,7 +525,7 @@
             // 
             this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button7.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button7.Location = new System.Drawing.Point(587, 25);
+            this.button7.Location = new System.Drawing.Point(554, 25);
             this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(32, 27);
@@ -547,7 +539,7 @@
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(131)))), ((int)(((byte)(195)))), ((int)(((byte)(238)))));
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button6.Location = new System.Drawing.Point(803, 20);
+            this.button6.Location = new System.Drawing.Point(737, 20);
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(183, 31);
@@ -603,7 +595,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(491, 33);
+            this.label9.Location = new System.Drawing.Point(458, 33);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(95, 13);
@@ -615,12 +607,40 @@
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel2.Text = "|";
+            // 
+            // txtByteToSave
+            // 
+            this.txtByteToSave.BackColor = System.Drawing.Color.LightYellow;
+            this.txtByteToSave.Name = "txtByteToSave";
+            this.txtByteToSave.Size = new System.Drawing.Size(92, 17);
+            this.txtByteToSave.Text = "0 byte(s) to save";
+            this.txtByteToSave.Click += new System.EventHandler(this.txtByteToSave_Click);
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.Location = new System.Drawing.Point(763, 14);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(86, 78);
+            this.button5.TabIndex = 5;
+            this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // MainFRM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1018, 690);
+            this.ClientSize = new System.Drawing.Size(952, 690);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
@@ -679,7 +699,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox cmbDataFormat;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ComboBox cmbBaod;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -693,6 +712,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel txtByteToSave;
+        private System.Windows.Forms.Button button5;
     }
 }
 

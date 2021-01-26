@@ -1,6 +1,6 @@
 ﻿namespace AdaptiveSerialLogger.Win
 {
-    partial class SenderFRM
+    partial class TextViewFRM
     {
         /// <summary>
         /// Required designer variable.
@@ -34,31 +34,36 @@
             // 
             // txtMessageTosend
             // 
-            this.txtMessageTosend.Location = new System.Drawing.Point(27, 12);
+            this.txtMessageTosend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMessageTosend.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMessageTosend.Location = new System.Drawing.Point(0, 0);
+            this.txtMessageTosend.Multiline = true;
             this.txtMessageTosend.Name = "txtMessageTosend";
-            this.txtMessageTosend.Size = new System.Drawing.Size(265, 20);
-            this.txtMessageTosend.TabIndex = 0;
+            this.txtMessageTosend.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtMessageTosend.Size = new System.Drawing.Size(528, 592);
+            this.txtMessageTosend.TabIndex = 555;
+            this.txtMessageTosend.TextChanged += new System.EventHandler(this.txtMessageTosend_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(167, 38);
+            this.button1.Location = new System.Drawing.Point(339, 269);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 66);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Send";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // SenderFRM
+            // TextViewFRM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 116);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(528, 592);
             this.Controls.Add(this.txtMessageTosend);
-            this.Name = "SenderFRM";
+            this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "TextViewFRM";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SenderFRM";
+            this.Text = "Data To Save";
             this.Load += new System.EventHandler(this.SenderFRM_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

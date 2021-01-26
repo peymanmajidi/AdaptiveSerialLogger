@@ -22,7 +22,7 @@ namespace AdaptiveSerialLogger.Win
         {
             InitializeComponent();
         }
-
+        bool first_connect = true;
         private void MainFRM_Load(object sender, EventArgs e)
         {
 
@@ -126,6 +126,13 @@ namespace AdaptiveSerialLogger.Win
             timer1.Enabled = true;
 
 
+            if(!first_connect)
+            TextFile.DataToSave = "";
+            txtByteToSave.Text = $"{TextFile.DataToSave.Length} byte(s) to save";
+
+
+            first_connect = false;
+
 
 
         }
@@ -170,6 +177,7 @@ namespace AdaptiveSerialLogger.Win
 
             timer1.Enabled = false;
 
+
         }
 
         private void MainFRM_FormClosed(object sender, FormClosedEventArgs e)
@@ -190,6 +198,14 @@ namespace AdaptiveSerialLogger.Win
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(TextFile.DataToSave.Length <1)
+            {
+
+                MessageBox.Show("Nothing to save yet", "Empty File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return;
+            }
+
             var save = new SaveFileDialog()
             {
                 Filter = "Text File|*.txt",
@@ -204,6 +220,9 @@ namespace AdaptiveSerialLogger.Win
         {
             txtLog.Clear();
             TextFile.DataToSave = "";
+            txtByteToSave.Text = $"{TextFile.DataToSave.Length} byte(s) to save";
+
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -213,7 +232,7 @@ namespace AdaptiveSerialLogger.Win
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.adaptiveagrotech.com/");
+            txtLog.Text = TextFile.Help() + "\r\n" + txtLog.Text;
 
         }
 
@@ -264,7 +283,15 @@ namespace AdaptiveSerialLogger.Win
             {
                 var msg = txtMessageTosend.Text;
                 var port_name = comboBox1.SelectedItem.ToString();
-                var port = PortTools.GetPort(port_name).serialPort;
+                var serial = PortTools.GetPort(port_name);
+                if (serial == null)
+                {
+                    MessageBox.Show("Please Connect to the port first\r\nThen try to send data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                var port = serial.serialPort;
                 if (port.IsOpen)
                 {
                     new Thread(() =>
@@ -277,10 +304,11 @@ namespace AdaptiveSerialLogger.Win
 
                 }
                 else
-                    MessageBox.Show("Please First Connect to port, Then send data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please Connect to the port first\r\nThen try to send data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 
             }
-            catch (Exception ex)
+              catch (Exception ex)
             {
                 txtLog.Text = ex.Message + Environment.NewLine + txtLog.Text;
 
@@ -332,21 +360,39 @@ namespace AdaptiveSerialLogger.Win
         {
             PresetButtons(sender);
         }
-
+        string lastLog = "";
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (PortTools.Last != null)
+            if (lastLog != TextFile.DataToLog)
             {
-                var port = PortTools.Last;
-                PortTools.Last = null;
-                //TextFile.Append(port.serialPort.PortName, port.Data, false, chkNewline.Checked);
-                TextFile.DataToSave += Environment.NewLine + port.Data;
-                var log = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToString("HH:mm:ss")} Data: `{port.Data}`\r\n" + txtLog.Text;
+                lastLog = TextFile.DataToLog;
+                var log = TextFile.DataToLog + Environment.NewLine + txtLog.Text;
                 if (log.Length > Program.MAX_LOG_LENGTH)
                     log = log.Substring(0, Program.MAX_LOG_LENGTH);
                 txtLog.Text = log;
 
+                TextFile.DataToSave += TextFile.Data;
+                if (chkNewline.Checked)
+                    TextFile.DataToSave += Environment.NewLine;
+
+                txtByteToSave.Text = $"{TextFile.DataToSave.Length} byte(s) to save";
+
             }
+        }
+
+        private void txtByteToSave_Click(object sender, EventArgs e)
+        {
+            new TextViewFRM().ShowDialog();
+            txtByteToSave.Text = $"{TextFile.DataToSave.Length} byte(s) to save";
+
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            new TextViewFRM().ShowDialog();
+            txtByteToSave.Text = $"{TextFile.DataToSave.Length} byte(s) to save";
+
+
         }
     }
 }

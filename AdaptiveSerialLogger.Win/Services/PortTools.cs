@@ -18,7 +18,7 @@ namespace AdaptiveSerialLogger.Win.Services
     class PortTools
     {
         public static List<Port> Ports = new List<Port>();
-        public static Port Last;
+ 
 
 
         public static DataFormat DataFormat
@@ -176,13 +176,9 @@ namespace AdaptiveSerialLogger.Win.Services
 
 
             var my_port = (SerialPort)sender;
-
-            Last = new Port
-            {
-                serialPort = my_port,
-                Data = data
-
-            };
+            TextFile.Data = data;
+            TextFile.DataToLog = $"Port: [{my_port.PortName}] Time:{DateTime.Now.ToString("HH:mm:ss")} Data: `{data}`";
+           
 
 
         }

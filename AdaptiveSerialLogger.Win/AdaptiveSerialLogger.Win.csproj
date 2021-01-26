@@ -57,11 +57,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SenderFRM.cs">
+    <Compile Include="TextViewFRM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SenderFRM.Designer.cs">
-      <DependentUpon>SenderFRM.cs</DependentUpon>
+    <Compile Include="TextViewFRM.Designer.cs">
+      <DependentUpon>TextViewFRM.cs</DependentUpon>
     </Compile>
     <Compile Include="SerialPortIcon.cs">
       <SubType>UserControl</SubType>
@@ -85,8 +85,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SenderFRM.resx">
-      <DependentUpon>SenderFRM.cs</DependentUpon>
+    <EmbeddedResource Include="TextViewFRM.resx">
+      <DependentUpon>TextViewFRM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SerialPortIcon.resx">
       <DependentUpon>SerialPortIcon.cs</DependentUpon>

@@ -10,7 +10,9 @@ namespace AdaptiveSerialLogger.Win.Services
 {
     class TextFile
     {
-        public static string DataToSave { get; set; }
+        public static string DataToSave { get; set; } = "";
+        public static string DataToLog { get; set; }= "";
+        public static string Data { get; set; }= "";
         public static void OpenFile(string port_name, bool banner = true)
         {
             try
