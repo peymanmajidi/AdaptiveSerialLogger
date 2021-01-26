@@ -33,7 +33,6 @@
             this.btnConnnect = new System.Windows.Forms.Button();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.btnDisConnect = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -71,6 +70,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -95,7 +95,7 @@
             this.btnConnnect.UseVisualStyleBackColor = false;
             this.btnConnnect.Click += new System.EventHandler(this.btnConnect_Clicked);
             // 
-            // txtData
+            // txtLog
             // 
             this.txtLog.BackColor = System.Drawing.Color.Black;
             this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -104,7 +104,7 @@
             this.txtLog.Location = new System.Drawing.Point(2, 15);
             this.txtLog.Margin = new System.Windows.Forms.Padding(2);
             this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtData";
+            this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtLog.Size = new System.Drawing.Size(998, 224);
             this.txtLog.TabIndex = 3;
@@ -124,11 +124,6 @@
             this.btnDisConnect.Text = "Disconnect All";
             this.btnDisConnect.UseVisualStyleBackColor = false;
             this.btnDisConnect.Click += new System.EventHandler(this.btnDis);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // panel
             // 
@@ -615,6 +610,11 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "Preset Commands:";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // MainFRM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -655,7 +655,6 @@
         private System.Windows.Forms.Button btnConnnect;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.Button btnDisConnect;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.FlowLayoutPanel panel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -693,6 +692,7 @@
         private System.Windows.Forms.TextBox txtMessageTosend;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

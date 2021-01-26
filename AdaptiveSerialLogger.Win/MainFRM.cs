@@ -17,6 +17,7 @@ namespace AdaptiveSerialLogger.Win
 {
     public partial class MainFRM : Form
     {
+
         public MainFRM()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace AdaptiveSerialLogger.Win
             LoadAllPorts();
             cmbBaod.SelectedIndex = 11;
 
-             cmbDataFormat.SelectedIndex = cmbParity.SelectedIndex = 0;
+            cmbDataFormat.SelectedIndex = cmbParity.SelectedIndex = 0;
         }
 
         private void LoadAllPorts()
@@ -57,23 +58,23 @@ namespace AdaptiveSerialLogger.Win
                     port.Icon = icon;
                     panel.Controls.Add(port.Icon);
                     port.Icon.IconClick += Icon_IconClick;
-                  
+
                     PortTools.Ports.Add(port);
 
                     comboBox1.Items.Add(port_name);
 
 
                 }
-                catch 
+                catch
                 {
 
-                   
+
                 }
 
             }
 
 
-            if(comboBox1.Items.Count >0)
+            if (comboBox1.Items.Count > 0)
             {
                 comboBox1.SelectedIndex = 0;
             }
@@ -92,11 +93,11 @@ namespace AdaptiveSerialLogger.Win
             catch (Exception)
             {
 
-                
+
             }
         }
 
-       
+
 
         private void btnConnect_Clicked(object sender, EventArgs e)
         {
@@ -126,6 +127,7 @@ namespace AdaptiveSerialLogger.Win
 
 
 
+
         }
 
         private void ConnectToAll(int bRate, Parity parity, int databit)
@@ -144,7 +146,7 @@ namespace AdaptiveSerialLogger.Win
                         port.Icon.Icon = Properties.Resources.serial_ban;
 
                 }
-                catch 
+                catch
                 {
 
                 }
@@ -159,13 +161,12 @@ namespace AdaptiveSerialLogger.Win
             Cursor = Cursors.Default;
         }
 
-     
+
         private void btnDis(object sender, EventArgs e)
         {
             PortTools.CloseAllPorts();
             btnConnnect.Enabled = true;
             btnDisConnect.Enabled = false;
-
 
             timer1.Enabled = false;
 
@@ -176,22 +177,7 @@ namespace AdaptiveSerialLogger.Win
             PortTools.CloseAllPorts();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (PortTools.Last != null)
-            {
-                var port = PortTools.Last;
-                PortTools.Last = null;
-                TextFile.Append(port.serialPort.PortName, port.Data, false, chkNewline.Checked);
 
-                var log = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToString("HH:mm:ss")} Data: `{port.Data}`\r\n" + txtLog.Text;
-                if (log.Length > Program.MAX_LOG_LENGTH)
-                    log = log.Substring(0, Program.MAX_LOG_LENGTH);
-                txtLog.Text = log;
-
-            }
-
-        }
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
@@ -204,13 +190,20 @@ namespace AdaptiveSerialLogger.Win
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TextFile.OpenFolder();
+            var save = new SaveFileDialog()
+            {
+                Filter = "Text File|*.txt",
+
+            };
+            if (save.ShowDialog() == DialogResult.OK)
+                TextFile.SaveToFile(save.FileName);
 
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
             txtLog.Clear();
+            TextFile.DataToSave = "";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -267,7 +260,7 @@ namespace AdaptiveSerialLogger.Win
 
         private void btnSend_Clicked(object sender, EventArgs e)
         {
-           try
+            try
             {
                 var msg = txtMessageTosend.Text;
                 var port_name = comboBox1.SelectedItem.ToString();
@@ -287,11 +280,11 @@ namespace AdaptiveSerialLogger.Win
                     MessageBox.Show("Please First Connect to port, Then send data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-           catch (Exception ex)
+            catch (Exception ex)
             {
-              //  txtData.Text = ex.Message + Environment.NewLine + txtData.Text;
+                txtLog.Text = ex.Message + Environment.NewLine + txtLog.Text;
 
-            }      
+            }
         }
 
         private void cmbBaod_SelectedIndexChanged(object sender, EventArgs e)
@@ -338,6 +331,22 @@ namespace AdaptiveSerialLogger.Win
         private void button10_Click(object sender, EventArgs e)
         {
             PresetButtons(sender);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (PortTools.Last != null)
+            {
+                var port = PortTools.Last;
+                PortTools.Last = null;
+                //TextFile.Append(port.serialPort.PortName, port.Data, false, chkNewline.Checked);
+                TextFile.DataToSave += Environment.NewLine + port.Data;
+                var log = $"Port: [{port.serialPort.PortName}] Time:{DateTime.Now.ToString("HH:mm:ss")} Data: `{port.Data}`\r\n" + txtLog.Text;
+                if (log.Length > Program.MAX_LOG_LENGTH)
+                    log = log.Substring(0, Program.MAX_LOG_LENGTH);
+                txtLog.Text = log;
+
+            }
         }
     }
 }

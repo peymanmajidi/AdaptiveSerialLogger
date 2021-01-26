@@ -10,6 +10,7 @@ namespace AdaptiveSerialLogger.Win.Services
 {
     class TextFile
     {
+        public static string DataToSave { get; set; }
         public static void OpenFile(string port_name, bool banner = true)
         {
             try
@@ -28,6 +29,24 @@ namespace AdaptiveSerialLogger.Win.Services
             }
 
         }
+
+        public static void SaveToFile(string filename)
+        {
+            try
+            {
+
+                File.WriteAllText(filename, TextFile.DataToSave);
+
+                System.Diagnostics.Process.Start("notepad.exe", filename);
+            }
+            catch
+            {
+
+
+            }
+
+        }
+
 
         public static void CreateFile(string port_name, bool banner = false)
         {
@@ -58,13 +77,11 @@ namespace AdaptiveSerialLogger.Win.Services
         {
             try
             {
-                var path = AppDomain.CurrentDomain.BaseDirectory;
-
-                var file = path + "\\" + Program.FOLDER + "\\_" + port_name + ".txt";
-                CreateFile(port_name, banner);
+                
                 if (newLineAppend)
                     data = Environment.NewLine + data;
-                File.AppendAllText(file, data);
+
+                DataToSave += data;
             }
             catch
             {

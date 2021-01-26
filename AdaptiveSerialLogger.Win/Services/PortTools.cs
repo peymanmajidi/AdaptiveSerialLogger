@@ -20,6 +20,7 @@ namespace AdaptiveSerialLogger.Win.Services
         public static List<Port> Ports = new List<Port>();
         public static Port Last;
 
+
         public static DataFormat DataFormat
         {
             get; set;
@@ -175,14 +176,12 @@ namespace AdaptiveSerialLogger.Win.Services
 
 
             var my_port = (SerialPort)sender;
-            var port = GetPort(my_port.PortName);
-            port.Data += data + "\r\n";
 
             Last = new Port
             {
                 serialPort = my_port,
                 Data = data
-              
+
             };
 
 
