@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AdaptiveSerialLogger.Win.Services
@@ -89,35 +90,36 @@ namespace AdaptiveSerialLogger.Win.Services
 
         public static void CloseAllPorts()
         {
-
-            foreach (var item in Ports)
-            {
-                try
+           
+                foreach (var item in Ports)
                 {
-                    if (item.serialPort.IsOpen)
+                    try
                     {
-                        item.serialPort.DiscardInBuffer();
-                        item.serialPort.Close();
+                        if (item.serialPort.IsOpen)
+                        {
+                            item.serialPort.DiscardInBuffer();
+                            item.serialPort.Close();
+                        }
+
+                    }
+                    catch
+                    {
+
+
                     }
 
+                    try
+                    {
+                        if (item.Icon != null)
+                            item.Icon.Icon = Properties.Resources.serial_gray;
+                    }
+                    catch
+                    {
+
+
+                    }
                 }
-                catch
-                {
-
-
-                }
-
-                try
-                {
-                    if (item.Icon != null)
-                        item.Icon.Icon = Properties.Resources.serial_gray;
-                }
-                catch
-                {
-
-
-                }
-            }
+         
 
         }
 

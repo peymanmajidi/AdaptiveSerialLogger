@@ -13,6 +13,11 @@ namespace AdaptiveSerialLogger.Win
 {
     public partial class SerialPortIcon : UserControl
     {
+        [Browsable(true)]
+        [Category("Action")]
+        [Description("Invoked when user clicks button")]
+        public event EventHandler IconClick;
+
         public Port Port
         {
             get; set;
@@ -56,7 +61,8 @@ namespace AdaptiveSerialLogger.Win
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-           
+            if (this.IconClick != null)
+                this.IconClick(this, e);
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -78,7 +84,8 @@ namespace AdaptiveSerialLogger.Win
         {
             chkPort.Checked = !chkPort.Checked;
 
-            TextFile.OpenFile(portName);
+            //TextFile.OpenFile(portName);
+           // new SenderFRM(PortTools.GetPort(PortName)).Show();
         }
     }
 }

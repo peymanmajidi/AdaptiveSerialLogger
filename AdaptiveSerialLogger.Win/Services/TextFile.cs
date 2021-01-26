@@ -76,9 +76,7 @@ namespace AdaptiveSerialLogger.Win.Services
         public static string Help()
         {
             return $@"Help:
-Double-click on serial port icon: To open the text log file
 Checked `Add New-Line end of each data': Add a new line character between old and new stream data
-Checked `Include A.A Banner`: Add Adapive-AgroTech Banner as header of the new text-log file
 
 Contact Information:
  USA: +1-520-270-1304
