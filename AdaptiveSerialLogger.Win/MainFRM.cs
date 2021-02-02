@@ -126,8 +126,8 @@ namespace AdaptiveSerialLogger.Win
             timer1.Enabled = true;
 
 
-            if(!first_connect)
-            TextFile.DataToSave = "";
+            if (!first_connect)
+                TextFile.DataToSave = "";
             txtByteToSave.Text = $"{TextFile.DataToSave.Length} byte(s) to save";
 
 
@@ -198,7 +198,7 @@ namespace AdaptiveSerialLogger.Win
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(TextFile.DataToSave.Length <1)
+            if (TextFile.DataToSave.Length < 1)
             {
 
                 MessageBox.Show("Nothing to save yet", "Empty File", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -208,7 +208,7 @@ namespace AdaptiveSerialLogger.Win
 
             var save = new SaveFileDialog()
             {
-                Filter = "Text File|*.txt",
+                Filter = "CSV File|*.csv|Text File|*.txt",
 
             };
             if (save.ShowDialog() == DialogResult.OK)
@@ -308,7 +308,7 @@ namespace AdaptiveSerialLogger.Win
 
 
             }
-              catch (Exception ex)
+            catch (Exception ex)
             {
                 txtLog.Text = ex.Message + Environment.NewLine + txtLog.Text;
 
@@ -351,7 +351,7 @@ namespace AdaptiveSerialLogger.Win
             PresetButtons(sender);
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void btnR(object sender, EventArgs e)
         {
             PresetButtons(sender);
         }
@@ -393,6 +393,12 @@ namespace AdaptiveSerialLogger.Win
             txtByteToSave.Text = $"{TextFile.DataToSave.Length} byte(s) to save";
 
 
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            btnConnect_Clicked( sender,  e);
+            btnR( sender,  e);
         }
     }
 }
