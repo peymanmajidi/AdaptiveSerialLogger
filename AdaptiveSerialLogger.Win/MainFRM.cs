@@ -408,5 +408,10 @@ namespace AdaptiveSerialLogger.Win
                 PresetButtons(btnR);
             }
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
