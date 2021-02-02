@@ -39,7 +39,9 @@ namespace AdaptiveSerialLogger.Win.Services
 
                 File.WriteAllText(filename, TextFile.DataToSave);
 
-                System.Diagnostics.Process.Start("notepad.exe", filename);
+             
+                System.Diagnostics.Process.Start(filename);
+                
             }
             catch
             {
