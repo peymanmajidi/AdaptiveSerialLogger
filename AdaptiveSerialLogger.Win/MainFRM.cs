@@ -401,10 +401,11 @@ namespace AdaptiveSerialLogger.Win
 
         private void button11_Click(object sender, EventArgs e)
         {
+            btnDis(sender, e);
             var result = ConnectToSelectedPorts();
             if (result)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(300);
                 PresetButtons(btnR);
             }
         }
