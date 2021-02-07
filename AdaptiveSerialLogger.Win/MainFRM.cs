@@ -399,14 +399,14 @@ namespace AdaptiveSerialLogger.Win
 
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void btnDownload_Clicked(object sender, EventArgs e)
         {
-            btnDis(sender, e);
-            var result = ConnectToSelectedPorts();
-            if (result)
+            btnDis(sender, e); // Disconnect first
+            var result = ConnectToSelectedPorts(); // connect
+            if (result) // if connected successfully
             {
-                Thread.Sleep(300);
-                PresetButtons(btnR);
+                Thread.Sleep(100); // sleep for a while
+                PresetButtons(btnR); // send 'r' key
             }
         }
 

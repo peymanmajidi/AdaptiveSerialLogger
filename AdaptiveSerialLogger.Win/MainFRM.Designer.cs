@@ -33,10 +33,8 @@
             this.btnConnnect = new System.Windows.Forms.Button();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.btnDisConnect = new System.Windows.Forms.Button();
-            this.panel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button11 = new System.Windows.Forms.Button();
             this.cmbBaod = new System.Windows.Forms.ComboBox();
             this.cmbDataFormat = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -74,6 +72,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button11 = new System.Windows.Forms.Button();
+            this.panel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -128,19 +128,6 @@
             this.btnDisConnect.UseVisualStyleBackColor = false;
             this.btnDisConnect.Click += new System.EventHandler(this.btnDis);
             // 
-            // panel
-            // 
-            this.panel.AutoScroll = true;
-            this.panel.BackColor = System.Drawing.Color.White;
-            this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel.Location = new System.Drawing.Point(2, 15);
-            this.panel.Margin = new System.Windows.Forms.Padding(2);
-            this.panel.Name = "panel";
-            this.panel.Padding = new System.Windows.Forms.Padding(8, 8, 0, 0);
-            this.panel.Size = new System.Drawing.Size(692, 266);
-            this.panel.TabIndex = 6;
-            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -181,22 +168,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Configuration\r\n";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
-            // button11
-            // 
-            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(115)))), ((int)(((byte)(70)))));
-            this.button11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button11.Enabled = false;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button11.ForeColor = System.Drawing.Color.White;
-            this.button11.Location = new System.Drawing.Point(2, 186);
-            this.button11.Margin = new System.Windows.Forms.Padding(2);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(234, 33);
-            this.button11.TabIndex = 12;
-            this.button11.Text = "Download (r)";
-            this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // cmbBaod
             // 
@@ -654,6 +625,36 @@
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(115)))), ((int)(((byte)(70)))));
+            this.button11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button11.Enabled = false;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button11.ForeColor = System.Drawing.Color.White;
+            this.button11.Location = new System.Drawing.Point(2, 186);
+            this.button11.Margin = new System.Windows.Forms.Padding(2);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(234, 33);
+            this.button11.TabIndex = 12;
+            this.button11.Text = "Download (r)";
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Visible = false;
+            this.button11.Click += new System.EventHandler(this.btnDownload_Clicked);
+            // 
+            // panel
+            // 
+            this.panel.AutoScroll = true;
+            this.panel.BackColor = System.Drawing.Color.White;
+            this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel.Location = new System.Drawing.Point(2, 15);
+            this.panel.Margin = new System.Windows.Forms.Padding(2);
+            this.panel.Name = "panel";
+            this.panel.Padding = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            this.panel.Size = new System.Drawing.Size(692, 266);
+            this.panel.TabIndex = 6;
+            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
+            // 
             // MainFRM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -694,7 +695,6 @@
         private System.Windows.Forms.Button btnConnnect;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.Button btnDisConnect;
-        private System.Windows.Forms.FlowLayoutPanel panel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
@@ -735,6 +735,7 @@
         private System.Windows.Forms.ToolStripStatusLabel txtByteToSave;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.FlowLayoutPanel panel;
     }
 }
 
