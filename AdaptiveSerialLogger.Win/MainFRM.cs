@@ -61,7 +61,7 @@ namespace AdaptiveSerialLogger.Win
 
                     PortTools.Ports.Add(port);
 
-                    comboBox1.Items.Add(port_name);
+                    cmbPorts.Items.Add(port_name);
 
 
                 }
@@ -74,9 +74,9 @@ namespace AdaptiveSerialLogger.Win
             }
 
 
-            if (comboBox1.Items.Count > 0)
+            if (cmbPorts.Items.Count > 0)
             {
-                comboBox1.SelectedIndex = 0;
+                cmbPorts.SelectedIndex = 0;
             }
 
 
@@ -87,7 +87,7 @@ namespace AdaptiveSerialLogger.Win
             var icon = (SerialPortIcon)sender;
             try
             {
-                comboBox1.SelectedItem = icon.Name;
+                cmbPorts.SelectedItem = icon.Name;
                 btnConnnect.Text = $"Connect";
             }
             catch (Exception)
@@ -143,6 +143,7 @@ namespace AdaptiveSerialLogger.Win
 
         private void ConnectToAll(int bRate, Parity parity, int databit)
         {
+            cmbPorts.Items.Clear();
             foreach (var port in PortTools.GetListOfSelected())
             {
 
@@ -152,7 +153,11 @@ namespace AdaptiveSerialLogger.Win
                     var result = PortTools.AddListener(port.Icon.PortName, bRate, parity, databit);
 
                     if (result)
+                    {
                         port.Icon.Icon = Properties.Resources.serial_normal;
+                        cmbPorts.Items.Add(port.Icon.PortName);
+
+                    }
                     else
                         port.Icon.Icon = Properties.Resources.serial_ban;
 
@@ -168,6 +173,15 @@ namespace AdaptiveSerialLogger.Win
             btnConnnect.Text = "Connect";
             //panel.Enabled = false;
             lblMessage.Text = "Done!";
+
+         
+
+            if (cmbPorts.Items.Count > 0)
+            {
+                cmbPorts.SelectedIndex = cmbPorts.Items.Count -1;
+               
+
+            }
 
             Cursor = Cursors.Default;
         }
@@ -286,7 +300,7 @@ namespace AdaptiveSerialLogger.Win
             try
             {
                 var msg = txtMessageTosend.Text;
-                var port_name = comboBox1.SelectedItem.ToString();
+                var port_name = cmbPorts.SelectedItem.ToString();
                 var serial = PortTools.GetPort(port_name);
                 if (serial == null)
                 {
